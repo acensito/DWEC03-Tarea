@@ -1,314 +1,129 @@
-﻿<!DOCTYPE html>
-<!-- Desarrollo Web en Entorno Cliente -->
-<!-- Tema 4: Estructuras definidas por el usuario en JavaScript -->
-<!-- Felipe Rodríguez Gutiérrez -->
-<!-- Tarea: 04 Prison Broke -->
+<!DOCTYPE html>
+<!--
+    CODIGO CREADO BAJO LICENCIA CREATIVE COMMONS
+    Reconocimiento - NoComercial - CompartirIgual (by-nc-sa):
+    No se permite un uso comercial de la obra original ni de las posibles obras
+    derivadas, la distribución de las cuales se debe hacer con una licencia igual
+    a la que regula la obra original.
+-->
 
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>DWEC - Tarea 4 - Felipe Rodríguez Gutiérrez</title>
-        <link type="text/css" href="estilos.css" rel="stylesheet" />
-        <script type="text/javascript" src="dni.js"></script>
-        <script type="text/javascript" src="clases.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <title>DWEC - Tarea 3 - Felipe Rodríguez Gutiérrez</title>
+    <link type="text/css" href="estilos.css" rel="stylesheet" />
+    <script type="text/javascript" src="clases.js"></script>
+    <script type="text/javascript" src="dni.js"></script>
+</head>
 
 <body>
-    <h1>DWEC - Tarea 4 </h1>
-    <h1> Prison Broke</h1>
-
-    <div id="enunciado">
-        <h2>Actividad 1:</h2>
-        <p>** Preguntar por un NIF y confirmar que sea correcto. Sino seguir preguntando.
-    </div>
+    <nav><img src="img/logo.png" alt="Mercamona"></nav>
     <script>
-        /* En este script, salvo que se cancele, se solicita un número de documento 
-         * DNI/NIE que será validado y mostrado en pantalla el resultado de su
-         * prueba de validación haciando llamada a la función calcularNIF
-         * 
-         */
-        
-        // Se pide por prompt que se introduzca el número de documento
-        var dni = prompt ("Introduzca un DNI/NIE");
-
-        if (dni !== null) { //Si el dni no es nulo, proseguimos ...
-            dni = dni.toUpperCase(); //Pasamos a mayúscula todo, para evitar porsibles errores.
-            
-            if (calcularNIF(dni)) { //Si el documento ha sido validado por la función...
-                document.write("El numero de documento " + dni + ", es correcto.");
-            } else { //Si el documento ha sido invalidado por la función...
-                document.write("El numero de documento " + dni + ", no es válido.");
-            }
-            
-            //Opción alternativa. Solicitar DNI hasta introducir uno correcto.
-            //while (!calcularNIF(dni)) {
-            //    dni = prompt("Documento incorrecto, introduzca uno de nuevo.");
-            //    dni = dni.toUpperCase();
-            //};
-        } else { //En caso que el usuario haya cancelado el prompt, mostramos mensaje.
-            document.writeln("Usted ha cancelado la acción. No se comprueba el documento");
-        }
-    </script>
-
-    <div id="enunciado">
-        <h2>Actividad 2:</h2>
-        <p>** Deberéis tener creado unos delitos y uno presos con penas por defecto en código</p>
-    </div>
-
-    <script>
-        /*
-         * Se ha reaprovechado el contenido del index.html cambiando los valores
-         * de los delitos y de los presos.
-         */
-        // Creamos el objeto que almacena la legislación. 
-        var LegislacionEspecifica = new Legislacion();
-
-        // Se añaden delitos con su pena mínima y máxima.
-        LegislacionEspecifica.addDelito(new Delito("Creerse las predicciones de Rappel", 0, 10));
-        LegislacionEspecifica.addDelito(new Delito("Hacer spoilers de Mujeres Hombres y Viceversa", 3, 100));
-        LegislacionEspecifica.addDelito(new Delito("Manifestar ser fan de Falete", 5, 100));
-        LegislacionEspecifica.addDelito(new Delito("Haber comprado el ultimo disco de Kiko Rivera", 12, 150));
-        LegislacionEspecifica.addDelito(new Delito("Hacerse selfies con el pijama de Belén Esteban", 5, 334));
-
-        // Creamos al preso1
-        var preso1 = new Convicto("Francisco Nicolás", "12345678Z", LegislacionEspecifica);
-
-        // Se le añade al preso los delitos y sus condenas
-        preso1.addPena(LegislacionEspecifica.getDelito(0).getFechoria(), 5);
-        preso1.addPena(LegislacionEspecifica.getDelito(3).getFechoria(), 70);
-
-        // Se muestra por pantalla al preso y sus condenas.
-        document.write(preso1);
-
-
-        // Creamos al preso2
-        var preso2 = new Convicto("Kiko Matamoros", "23456789D", LegislacionEspecifica);
-        
-        //Se le añade al preso los delitos y sus codenas
-        preso2.addPena(LegislacionEspecifica.getDelito(2).getFechoria(), 90);
-        preso2.addPena(LegislacionEspecifica.getDelito(1).getFechoria(), 30);
-
-        // Se muestra por pantalla al preso y sus condenas.
-        document.write(preso2);
-
-        // Creamos la prisión 
-        var prision = new Prision ();
-
-        // Ingresamos los presos en la prisión
-        prision.addPreso(preso1);
-        prision.addPreso(preso2);
+        //Creamos objetos productos diversos
+        var mora = new Producto ("Mora", 2, true);
+        var patata = new Producto ("Patata", 1, false);
+        var pipas = new Producto ("Pipas", 2, false);
+        var chicharo = new Producto ("Chicharo", 3, true);
+        var naranja = new Producto ("Naranja", 1, true);
+        var lejia = new Producto ("Lejía", 2, false);
+        var yogur = new Producto ("Yogur", 4,true);
     </script>
     
-    <div id="enunciado">
-        <h2>Actividad 3.1</h2>
-        <p>** Poder añadir delitos. Se preguntan cuantos y se piden.</p>
-    </div>
+    <h2>Mostrando las propiedades de algunos productos</h2>
     <script>
-        /*
-         * Principalmente será un ciclo for en el que se pedirán el número de
-         * preceptos del código penal a introducir y se irán pidiendo poco a 
-         * poco por pantalla.
-         * 
-         * Una vez iniciado el ciclo, no se podra cancelar hasta haber introducido
-         * todos los datos correctamente.
-         */
+        //Mostramos las propiedades de algunos de los objetos
+        document.write(patata);
+        document.write(naranja);
+        document.write(lejia);
+        document.write(mora);
         
-        var num = prompt("¿Cuantos delitos desea introducir?"); //Solicitamos por pantalla...
-        
-        if (num !== null && !isNaN(num) && num > 0) { //Si lo introducido no es nulo, es un número y mayor que cero....
-            for (var i = 0; i < num; i++) { //Comenzamos el ciclo tantas veces como se haya solicitado
-                var precepto = prompt ("Introduzca un texto legal:"); //Solicitamos un precepto
-                while (precepto === null || precepto === "") { //si no se ha introducido nada o vacio, volvemos a pedir hasta introducir un texto
-                    precepto = prompt("Por favor, introduzca un texto válido");
-                }
-                var diasMin = prompt("Introduzca la pena mínima a cumplir en días"); //Solicitamos un dia minimo de condena
-                while (diasMin === null || diasMin === "" || isNaN(diasMin) || diasMin < 0) { //Si no se ha introducido nada o vacio ó el numero introducido es menor que 0...
-                    diasMin = prompt("Por favor, introduzca un número válido"); //Volvemos a solicitar la entrada de datos hasta que sea validada...
-                }
-                var diasMax = prompt("Introduzca la pena máxima a cumplir en días"); //Solicitamos un dia máximo de condena
-                while (diasMax === null || diasMax === "" || isNaN(diasMax) || diasMax < diasMin) { //Como el caso anterior, salvo que en este el numero no puede ser menor que la pena mínima
-                    diasMax = prompt("Por favor, introduzca un número válido"); //En caso contrario, solicitamos la entrada de datos hasta que sea válida
-                }
-            };
-            
-            // Una vez finalizado todo, supuestamente todos los datos están validados, por lo que añadimos el objeto que creamos a LegislacionEspecifica
-            LegislacionEspecifica.addDelito(new Delito(precepto, diasMin, diasMax));
-            
-            document.write("<p>Delito " + precepto +", añadido al Código Penal correctamente</p>"); //Dejamos un mensaje de feedback...
-        } else if (num === null) { // En el caso que el resultado sea nulo, el usuario ha decidido
-            document.write("Usted ha decidido cancelar esta acción"); 
-        } else if (num === "" || isNaN(num) || num < 0) { //En el caso de haber introducido algo que no fuera un número o fuera de rango...
-            document.write("Usted ha introducido un número incorrecto");
-        }
-    </script>
-
-    <div id="enunciado">
-        <h2>Actividad 3.2</h2>
-        <p>** Poder añadir presos. Preguntas cuantos y los pides</p>
-    </div>
-    <script>
-        /*
-         * Este script es similar al anterior. Le sumaremos la dificultad de tener
-         * que añadirle penas preestablecidas en el código penal LegislaciónEspecifica.
-         * 
-         * Se pedira un numero de presos a encarcelar y se creará e insertará en prisión.
-         * Posteriormente se le pedirá insertar alguna pena si se desea.
-         * 
-         * Una vez comenzado el ciclo, no podrá cancelarse la acción hasta haber 
-         * introducido correctamente los presos solicitados al menos su nombre y
-         * documento NIF (que se valida en el transcurso).
-         */
-        var num = prompt("¿Cuantos presos desea encarcelar?"); //Solicitamos el numero de presos a encarcelar
-        if (num !== null && !isNaN(num) && num > 0) { //Si ha introducido un número válido (no nulo, solo número, mayor que cero...)
-            for (var i = 0; i < num; i++) { //Comenzamos el ciclo tantas veces como se ha introducido
-                var reo = prompt ("Introduzca nombre del reo"); //Solicitamos nombre del futuro preso
-                while (reo === null || precepto === "") { //Mientras no introduzca un texto, solicitamos los datos hasta introducir algo
-                    reo = prompt("Por favor, introduzca un nombre válido");
-                }
-                var documento = prompt("Introduzca su número de documento de identidad"); //Solicitamos el número de documento
-                documento = documento.toUpperCase(); //Lo pasamos a mayúsculas, evitamos errores de validación
-                while (documento === null || !calcularNIF(documento)) { //Mientras el documento no sea validado....
-                    documento = prompt("Por favor, introduzca un número de documento válido"); //Solicitamos el nuevo número de documento
-                    documento = documento.toUpperCase(); //Que también ponemos en mayúsculas
-                }
-
-                var condenado = new Convicto (reo, documento, LegislacionEspecifica); //Creamos al reo
-                prision.addPreso(condenado); //Lo ingresamos en prisión
-                document.write("<p>Preso: " + reo +", ingresado en prisión correctamente</p>"); //Mandamos mensaje de feedback...
-                
-                /*
-                 * Esta es la parte donde solicitaremos añadirle condenas. La he
-                 * puesto optativa de cara al usuario
-                 */
-
-                if (confirm("¿Desea añadirle las condenas?")) { //Solicitamos confirmación
-                    var numcondenas = prompt("¿Cuantas condenas va a introducir?"); //Solicitamos un número de condenas
-                    if (numcondenas !== null && !isNaN(numcondenas) && numcondenas > 0) { //Si el número introducido es válido y mayor que cero..
-                        for (var j = 0; j < numcondenas; j++) { //Comenzamos el ciclo
-                            var condena = prompt("Introduzca una condena"); //Pedimos una condena
-                            var diasCondena = prompt("Introduzca dias de condena"); //Pedimos días de condena
-                            var flagCondena = false; //Armamos flag de control sobre precepto de la condena
-                            var flagDias = false; //Armamos flag de control sobre número de dias condenado
-                            
-                            for (var k in LegislacionEspecifica.delitosyFaltas) { //Consultamos si existe esa condena en nuestro código penal uno a uno
-                                if (condena === LegislacionEspecifica.getDelito(k).getFechoria()) {
-                                    flagCondena = true; //Si existe, validamos y cambiamos el flag a verdadero
-                                };
-
-                                if (diasCondena > 0 && diasCondena <= LegislacionEspecifica.getDelito(k).getPenaMaxima() && diasCondena >= LegislacionEspecifica.getDelito(k).getPenaMinima()) {
-                                    flagDias = true; //Si el número de días de condena está dentro del rango (Mayor que cero y entre la pena máxima y mínima), validamos el flag
-                                }
-                            };
-
-                            if (flagCondena && flagDias) { //Si se han validado los dos flags de control, todo está correcto, le añadimos la pena al condenado...
-                                condenado.addPena(condena, diasCondena); //Añadimos la condena al condenado...
-                                document.write("Se le ha añadido una condena satisfactoriamente"); //Mensaje de feedback
-                            } else if (!flagCondena) { //Si no se ha encontrado la condena en el código penal....
-                                document.write("Ha introducido una condena inexistente"); 
-                            } else if (!flagDias) { //Si el número de dias de condena están fuera de rango...
-                                document.write(("He introducido un numero de dias de condena incorrecto"));
-                            } else {
-                                document.write("Error no documentado"); //En cualquier otro caso....
-                            }
-                        }
-                    } else {
-                        document.write("Ha introducido un número incorrecto"); //Si se introduce un número incorrecto...
-                    }    
-                } else {
-                    document.write("Ha decidido no añadir condenas al preso " + reo); //Si se decide no introducirle condenas...
-                }  
-            };
-        } else if (num === null) {
-            document.write("Usted ha decidido cancelar esta acción"); //Si no desea introducir preso alguno...
-        } else if (num === "" || isNaN(num)) {
-            document.write("Usted ha introducido un número incorrecto"); //Si no se ha introducido un número correctamente...
-        }
-    </script>
-
-    <div id="enunciado">
-        <h2>Actividad 3.3</h2>
-        <p>** Listar los contenidos de todas las clases que son arrays de objetos</p>
-    </div>
-
-    <h3>Se lista la legislación</h3>
-    <script>
-        // Mostramos la legislación que hemos creado.
-        document.write("<p>El vigente Código Penal que rige esta cárcel es el siguiente:<br />" + LegislacionEspecifica);
-        document.write("</p>");
-    </script>
-
-    <h3>Se listan los presos</h3>
-    <script>
-        // Se listan los presos. 
-        document.write("<p>En la cárcel <i> Prison Broke </i> podemos encontrar los siguientes presos:<br /> " + prision);
-        document.write("</p>");
-    </script> 
-
-    <div id="enunciado">
-        <h2>Actividad 3.4</h2>
-        <p>** Eliminar presos. Mostrar el número de presos y preguntas cuantos y que números o nombres quieres borrar</p>
-    </div>
-    
-    <script>
-        /*
-         * En este script, solicitamos el número de presos que se deseen indultar
-         * que nunca podrá superar al total de presos que tenemos en prisión.
-         */
-        // Solicitamos confirmación de la acción...
-        var pregunta = confirm("¿Desea indultar a algún preso? (no se lo recomiendo, son altamente peligrosos para la sociedad)");
-        
-        // Si ha sido afirmativa la respuesta...
-        if (pregunta) {
-            
-            // Listamos los presos existentes y el total en número, que será usado para limitar el número de indultos
-            document.write("<p>En la cárcel <i> Prison Broke </i> podemos encontrar los siguientes presos:<br /> " + prision);
-            document.write("</p>");
-            
-            document.write("<p>Total: " + prision.getTotal() + " internos<br /></p>");
-            
-            // Preguntamos por el número de presos a indultar
-            var numIndultos = prompt("¿Cuantos presos quiere indultar?");
-            
-            
-            /*
-             * Aqui abriremos un ciclo para ir haciendo las acciones de borrado
-             * una a una, mediante confirmación de documento, que será previamente
-             * validado por la función calcularDNI
-             */
-            if (numIndultos <= prision.getTotal()) { //Si es menor o igual al total... continuamos
-                for (var i = 0; i < numIndultos; i++) { //Comenzamos el ciclo
-                    var dniPreso = prompt("Introduzca el DNI/NIE del interno a indultar"); //Solicitamos el documento
-                    dniPreso = dniPreso.toUpperCase(); //Lo pasamos a mayúsculas...
-                    while (!calcularNIF(dniPreso)) { //Mientras no sea validado por la función calcularDNI se solicitará
-                        dniPreso = prompt("Introduzca un DNI/NIE válido");
-                        dniPreso = dniPreso.toUpperCase(); //Una vez introducido, se pasa a mayúsculas de nuevo
-                    };
-                    
-                    var resultado = prision.borraPreso(dniPreso); //Pasamos el resultado por la función, que devolverá TRUE/FALSE
-                    
-                    if (resultado) { //En el caso de haber indultado un preso...
-                        document.write("El prisionero con documento número " + dniPreso + " ha sido indultado<br />");
-                    } else { //En el caso de no existir preso con dicho documento...
-                        document.write("El prisionero con documento número " + dniPreso + " no se halla ingresada en esta prisión<br />");
-                    };
-                };
-            };
-        } else { //En caso de no querer indultar a nadie...
-            document.write("Gracias por la confianza depositada en nuestro sistema carcelario");
-        };
+        //Creamos varios objetos clientes
+        var cliente1 = new Cliente("Silvestre", "Repollo", "12345678Z", "Plaza del platanero 4", "123456");
+        var cliente2 = new Cliente("Cara", "Anchoa", "98765421V", "Calle Luis Ortiz Muñoz 3, 2ºA", "654321");
+        var cliente3 = new Cliente("Hipolito", "Rincón", "22222222J", "Calle Perdiz 2-Bajo", "abcabc");
     </script>
     
-    <div id="enunciado">
-        <h2>Actividad 3.5</h2>
-        <p>** Listar todos los presos que tiene la prisión</p>
-    </div>
+    <h2>Mostrando las propiedades de los clientes</h2>
     <script>
-        // Se listan los presos. 
-        document.write("<p>En la cárcel <i> Prison Broke </i> podemos encontrar los siguientes presos:<br /> " + prision);
-        document.write("</p>");
-    </script>
+        //Mostramos las propiedades de los clientes
+        document.write(cliente1);
+        document.write(cliente2);
+        document.write(cliente3);
         
-    <div id="pie">DWEC - Tarea 4 - Felipe Rodríguez Gutiérrez - 2015/2016</div>
+        //Creando un objeto carro y lo cargamos de productos
+        var carro1 = new  Cesta(cliente1, "Barriada El Vacie Chabola 7-A"); //Lo pide para su hermana.
+            carro1.addProducto(mora);
+            carro1.addProducto(pipas);
+            carro1.addProducto(patata);
+            carro1.addProducto(chicharo);
+            carro1.addProducto(lejia);
+        
+        var carro2 = new Cesta(cliente2, false);
+            carro2.addProducto(patata);
+            carro2.addProducto(lejia);
+        
+        var carro3 = new Cesta(cliente3,false);
+    </script>
+    
+    <h2>Mostrando los carros de la compra</h2>
+    <script>
+        document.write(carro1);
+        document.write(carro2);
+        document.write(carro3);
+    </script>
+    
+    <h2>Solicitando datos de un nuevo cliente por prompt</h2>
+    <script>
+        //Solicitaremos cada dato hasta que se defina para calidad.
+        //No será válido campos nulos, vacios o sin definir.
+        do{
+            var nombre = prompt("Introduzca un nombre");
+        } while ((nombre == undefined) || (nombre == "") || (nombre == null));
+        
+        do{
+            var apellido = prompt("Introduzca los apellidos");
+        } while ((nombre == undefined) || (apellido == "") || (apellido == null));
+        
+        //El documento de identidad se solicitará hasta que sea ingresado uno válido
+        //Se usará el validador de la funcion calcularNIF de dni.js
+        do{
+            var documento = prompt("Introduzca su DNI/NIE");
+        } while ((!calcularNIF(documento) || (documento == null));
+        
+        do{
+            var direccion = prompt("Introduzca la direccion");
+        } while ((direccion == undefined) || (direccion == "") || (direccion == null));
+        
+        do{
+            var password = prompt("Introduzca una contraseña");
+        } while ((password == undefined) || (password == "") || (password == null));
+        
+        //Con los datos obtenidos, creamos un objeto cliente nuevo, y mostramos las propiedades insertadas
+        var cliente4 = new Cliente(nombre, apellido, documento, direccion, password);
+        document.write(cliente4);
+        
+        //Optativo, creamos su cesta de la compra y lo mostramos
+        var carro4 = new Cesta(cliente4, false);
+        document.write(carro4);
+    </script>
+    
+    <h2>Modificando y mostrando la cesta de la compra</h2>
+    <script>
+        //Eliminamos productos de las cestas
+        carro1.delProducto(pipas);
+        carro2.delProducto(lejia);
+        
+        //Añadimos un producto a una cesta
+        carro3.addProducto(yogur);
+        carro3.addProducto(chicharo);
+        carro3.addProducto(yogur);
+        
+        //Mostramos los carros de la compra
+        document.write(carro1);
+        document.write(carro2);
+        document.write(carro3);
+    </script>
+
+    <footer>DWEC - Tarea 3 - Felipe Rodríguez Gutiérrez - 2016/2017</footer>
 </body>
-    
 </html>

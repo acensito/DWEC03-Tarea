@@ -15,13 +15,15 @@
  * @returns {Boolean} Valor true/false resultado de la validación
  */
 function calcularNIF(dninie) {
+    //Lo pasamos todo a mayúsculas para evitar errores
+    dninie = dninie.toUpperCase();
+    
     /*
      * Mascara para el DNI-NIE
      * == [xyzXYZ0-9]{1} -> El primer digito puede ser un número o X, Y, Z case insensitive
      * == \d{7} -> El resto tienen que ser 7 números
      * == \w{1} -> Una letra, case insensitive
      * == $ -> Fin de entrada
-     * 
      */
     var mascara_dni = /^[xyzXYZ0-9]{1}\d{7}\w{1}$/;
     
